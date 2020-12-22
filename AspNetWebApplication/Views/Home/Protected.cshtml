@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Protected";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+@Html.ActionLink("Logout IS", "LogoutIS", "Home", null, new { @class= "btn btn-primary" })
+
+<button type="button" class="btn btn-primary" id="callApi1">Call Api1</button>
+
+<div id="api-data"></div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $("#callApi1").click(() => {
+            fetch('@Url.Action("CallApi1Async", "Home")')
+                .then(resp => resp.text())
+                .then(data => $("#api-data").html(data))
+                .catch(error => console.log(error))
+        })
+    </script>
+}
